@@ -6,4 +6,5 @@ export const conf = {
     dbUri: process.env.MONGO_DB_URI,
     redisHost: process.env.REDIS_HOST,
     redisPort: process.env.REDIS_PORT,
+    cookieSecret: process.env.COOKIE_PARSER_SECRET
 }

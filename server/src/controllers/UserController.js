@@ -4,6 +4,19 @@ import ApiResponse from "../utility/ApiResponse.js";
 import { asyncHandler } from "../utility/AsyncHandler.js";
 
 class UserController {
+	#options = {
+		httpOnly: true,
+		secure: false,
+		sameSite: "strict",
+		signed: true,
+		maxAge: 24 * 60 * 60 * 1000,
+	};
+	#logoutOptions = {
+		httpOnly: true,
+		secure: false,
+		sameSite: "strict",
+		signed: true,
+	};
 	register = asyncHandler(async (req, res) => {
 		const { fullName, userName, password } = req.body;
 
@@ -32,8 +45,14 @@ class UserController {
 		}
 		res
 			.status(200)
-			.cookie("accessToken", accessToken)
+			.cookie("accessToken", accessToken, this.#options)
 			.json(new ApiResponse(200, "User Logged in successfully"));
+	});
+	logout = asyncHandler(async (req, res) => {
+		res
+			.status(200)
+			.clearCookie("accessToken", this.#logoutOptions)
+			.json(new ApiResponse(200, {}, "User logged out successfully"));
 	});
 }
 

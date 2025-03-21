@@ -67,6 +67,7 @@ class UserService {
 		}
 		return accessToken;
 	};
+
 }
 
 const userService = new UserService();
