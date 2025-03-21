@@ -1,7 +1,7 @@
 import ApiResponse from "./ApiResponse.js";
 
 const errorHandler = async (err, req, res, next) => {
-	console.error(err.stack);
+	console.error(err);
 	res
 		.status(err.code || 500)
 		.json(new ApiResponse(err.code || 500, {}, { message: err.message }));
