@@ -1,6 +1,6 @@
 import { client } from "./client.js";
 
-const setCache = async (key, data) => {
+const setCache = async (key, data, expire = 60 * 1) => {
 	try {
         return await client.set(key, data)
 	} catch (error) {
