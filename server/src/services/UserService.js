@@ -135,7 +135,7 @@ class UserService {
 		if(!userName){
 			throw ApiError(400, "Backend :: APIERROR :: Username is required")
 		}
-	}
+	};
 }
 
 const userService = new UserService();
