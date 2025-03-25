@@ -35,6 +35,7 @@ class UserService {
 		return { user };
 	};
 	login = async (userName, password) => {
+		console.log(userName, password)
 		if (!userName || !password) {
 			throw new ApiError(
 				400,

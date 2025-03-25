@@ -43,9 +43,10 @@ class UserController {
 				"BACKEND :: USER CONTROLLER :: REGISTER :: Didn't receive any accessToken in Controller"
 			);
 		}
+		console.log(accessToken)
 		res
 			.status(200)
-			.cookie("accessToken", accessToken, this.#options)
+			.cookie("accessToken", accessToken)
 			.json(new ApiResponse(200, "User Logged in successfully"));
 	});
 	logout = asyncHandler(async (req, res) => {
