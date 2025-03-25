@@ -1,5 +1,6 @@
 import { conf } from "../conf/conf.js";
 import { AdminEntry } from "../models/AdminEntry.js";
+import { User } from "../models/UserModel.js";
 import ApiError from "../utility/ApiError.js";
 import jwt from "jsonwebtoken";
 
@@ -32,17 +33,38 @@ class AdminService {
 			username,
 		};
 
-        await AdminEntry.create({
-            username,
-            name,
-        })
+		await AdminEntry.create({
+			username,
+			name,
+		});
 
 		const accessToken = await jwt.sign(payload, conf.adminAccessToken);
 
 		return accessToken;
 	}
+	async getUsers(currentPage, numOfUsersPerPage) {
+		const user = await User.aggregate([
+			{
+				$sort: {
+					createdAt: -1,
+				},
+			},
+			{
+				$skip: (currentPage - 1) * numOfUsersPerPage,
+			},
+			{
+				$limit: numOfUsersPerPage
+			},
+			{
+				$project:{
+					password: 0 
+				}
+			}
+		]);
+		return user;
+	}
 }
 
 const adminService = new AdminService();
 
-export default adminService
+export default adminService;
