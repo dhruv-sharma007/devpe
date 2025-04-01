@@ -1,13 +1,9 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@plugin "daisyui"{
-  themes: black --default 
+@plugin "daisyui" {
+    themes: bumblebee --default, luxury --prefersdark;
 }
-@custom-variant dark (&:is(.dark *));
 
-@utility dark{
-  @apply bg-slate-950
-}
-body{
-  color: aliceblue;
-}
+.heading {
+    font-family: 'Poppins', sans-serif;
+  }
+  
